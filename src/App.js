@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { ThemeProvider, createMuiTheme } from "@mui/material";
+import * as React from "react";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './components/Home/Home';
+import Login from './components/Login/Login';
+
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: [
+      'Chilanka',
+      'cursive',
+    ].join(','),
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
