@@ -1,10 +1,10 @@
-import { ThemeProvider, createMuiTheme } from "@mui/material";
+import { ThemeProvider } from "@mui/material";
+import { createTheme } from '@mui/material/styles';
 import * as React from "react";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './components/Home/Home';
-import Login from './components/Login/Login';
 
-const theme = createMuiTheme({
+const theme = createTheme({
   typography: {
     fontFamily: [
       'Chilanka',
@@ -20,7 +20,10 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Home />} />
+          <Route path="/signup" element={<Home />} />
+          <Route path="/add-percel" element={<Home />} />
+          <Route path="/my-percel" element={<Home />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

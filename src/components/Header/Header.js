@@ -14,7 +14,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import MoreIcon from '@mui/icons-material/MoreVert';
+import { Link } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -98,8 +98,8 @@ const Header = () => {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={handleMenuClose}><Link to="/login">Login </Link></MenuItem>
+            <MenuItem onClick={handleMenuClose}> <Link to="/signup">Signup </Link></MenuItem>
         </Menu>
     );
 
@@ -126,7 +126,7 @@ const Header = () => {
                         <MailIcon />
                     </Badge>
                 </IconButton>
-                <p>Messages</p>
+                <p>My Percel</p>
             </MenuItem>
             <MenuItem>
                 <IconButton
@@ -138,7 +138,7 @@ const Header = () => {
                         <NotificationsIcon />
                     </Badge>
                 </IconButton>
-                <p>Notifications</p>
+                <p>Add Percel</p>
             </MenuItem>
             <MenuItem onClick={handleProfileMenuOpen}>
                 <IconButton
@@ -167,7 +167,7 @@ const Header = () => {
                             aria-label="open drawer"
                             sx={{ mr: 2 }}
                         >
-                            <MenuIcon />
+                            <MailIcon />
                         </IconButton>
                         <Typography
                             variant="h6"
@@ -175,7 +175,8 @@ const Header = () => {
                             component="div"
                             sx={{ display: { xs: 'none', sm: 'block' } }}
                         >
-                            Delivery Depot
+                            <Link to="/">Delivery Depot </Link>
+
                         </Typography>
                         <Search>
                             <SearchIconWrapper>
@@ -186,22 +187,20 @@ const Header = () => {
                                 inputProps={{ 'aria-label': 'search' }}
                             />
                         </Search>
-                        <Box sx={{ flexGrow: 1 }} />
+                        <Box sx={{ flexGrow: 1 }} >
+
+                        </Box>
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                                <Badge badgeContent={4} color="error">
-                                    <MailIcon />
-                                </Badge>
-                            </IconButton>
-                            <IconButton
-                                size="large"
-                                aria-label="show 17 new notifications"
-                                color="inherit"
-                            >
-                                <Badge badgeContent={17} color="error">
-                                    <NotificationsIcon />
-                                </Badge>
-                            </IconButton>
+                            <MenuItem>
+                                <Link to="/" underline="none">My Percel</Link>
+                            </MenuItem>
+                            <MenuItem>
+                                <Link to="/add-percel" underline="none">Add Percel</Link>
+                            </MenuItem>
+
+
+
+
                             <IconButton
                                 size="large"
                                 edge="end"
@@ -223,7 +222,7 @@ const Header = () => {
                                 onClick={handleMobileMenuOpen}
                                 color="inherit"
                             >
-                                <MoreIcon />
+                                <MenuIcon />
                             </IconButton>
                         </Box>
                     </Toolbar>
