@@ -3,8 +3,13 @@ import React from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Box } from '@mui/system';
 import { useForm, Controller } from "react-hook-form";
+import useAuth from '../../hooks/useAuth';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Signup = () => {
+    const { user, signUpUsingEmail, singInUsingGoogle, isLoading, loginError } = useAuth();
+    const location = useLocation();
+    let navigate = useNavigate();
 
     const { control, handleSubmit } = useForm({
         defaultValues: {
@@ -15,13 +20,18 @@ const Signup = () => {
             checkbox: true
         }
     });
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
+        const { firstname, lastname, email, password } = data;
+        let fullname = firstname + ' ' + lastname;
+        signUpUsingEmail(fullname, email, password, location, navigate);
+
+    }
 
     const paperStyle = { padding: 20, height: '80vh', width: 300, margin: '20px auto' }
 
     return (
         <Grid>
-            <Paper elevation={2} style={paperStyle}>
+            {!user.email && <Paper elevation={2} style={paperStyle}>
                 <Grid align="center">
                     <Avatar><LockOutlinedIcon /></Avatar>
                     <h2>Sign Up</h2>
@@ -68,7 +78,7 @@ const Signup = () => {
                 </form>
 
 
-            </Paper>
+            </Paper>}
         </Grid>
     );
 };

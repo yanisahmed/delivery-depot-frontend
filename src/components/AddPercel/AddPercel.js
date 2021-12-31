@@ -5,8 +5,9 @@ import { useForm, Controller } from "react-hook-form";
 
 const AddPercel = () => {
 
-    const { control, handleSubmit } = useForm({
+    const { control, handleSubmit, reset } = useForm({
         defaultValues: {
+            percel_status: 'Pending',
             parcel_info: '',
             parcel_cost: '',
             parcel_starting_location: '',
@@ -19,7 +20,23 @@ const AddPercel = () => {
             receiver_phone: ''
         }
     });
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
+        // console.log(data);
+        fetch('https://enigmatic-beach-77527.herokuapp.com/percels', {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    alert('New percels Added');
+                    reset();
+                }
+            })
+    }
 
     const paperStyle = { padding: 20, minHeight: '80vh', width: 300, margin: '20px auto' }
 

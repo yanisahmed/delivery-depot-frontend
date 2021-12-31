@@ -15,6 +15,8 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Link } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
+import { Button } from '@mui/material';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -58,6 +60,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 
 const Header = () => {
+    const { user, logOut } = useAuth();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -98,8 +101,10 @@ const Header = () => {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}><Link to="/login">Login </Link></MenuItem>
-            <MenuItem onClick={handleMenuClose}> <Link to="/signup">Signup </Link></MenuItem>
+            {!user.displayName ? <MenuItem onClick={handleMenuClose}><Link to="/login">Login </Link></MenuItem> : <MenuItem onClick={handleMenuClose}> <span onClick={logOut}>Logout </span></MenuItem>}
+
+            {!user.email && <MenuItem onClick={handleMenuClose}> <Link to="/signup">Signup </Link></MenuItem>}
+
         </Menu>
     );
 
