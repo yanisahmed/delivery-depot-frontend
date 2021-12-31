@@ -1,4 +1,9 @@
 # Percel Management App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Live Link [Delivery Depot](https://deliverydepot.netlify.app/).
 
+
+## Tools Used
+- *React*
+- *Material UI*
+- *React Router v6*
